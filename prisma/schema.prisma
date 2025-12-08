@@ -41,6 +41,18 @@ model SousCategorie {
   @@map("sous_categorie")
 }
 
+
+model EvenementSousCategorie {
+  id_evenement      Int @map("id_evenement")
+  id_sous_categorie Int @map("id_sous_categorie")
+
+  evenement       Evenement       @relation(fields: [id_evenement], references: [id])
+  sous_categorie SousCategorie @relation(fields: [id_sous_categorie], references: [id])
+
+  @@id([id_evenement, id_sous_categorie])
+  @@map("evenement_sous_categorie")
+}
+
 model Evenement {
   id          Int       @id @default(autoincrement()) @map("id")
   titre       String    @map("titre") @db.VarChar(100)
