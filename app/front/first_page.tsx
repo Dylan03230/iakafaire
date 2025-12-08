@@ -7,7 +7,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 
 const MapboxMap = dynamic(() => import("@/app/components/MapboxMap"), {
-  ssr: false, // La carte ne sera pas rendue côté serveur
+  ssr: false, 
   loading: () => <div className="w-full h-[450px] bg-gray-200 rounded-lg flex items-center justify-center"><p>Chargement de la carte...</p></div>,
 });
  
