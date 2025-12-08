@@ -17,10 +17,10 @@ datasource db {
 model Utilisateur {
   id           Int    @id @default(autoincrement()) @map("id")
   login        String @unique @map("login") @db.VarChar(100)
-  mot_de_passe String @map("mod_de_passe") @db.VarChar(255)
+  mot_de_passe String @map("mot_de_passe") @db.VarChar(255)
 
   evenements_crees Evenement[]
-  
+
   @@map("utilisateur")
 }
 
