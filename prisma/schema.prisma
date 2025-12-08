@@ -19,6 +19,8 @@ model Utilisateur {
   login        String @unique @map("login") @db.VarChar(100)
   mot_de_passe String @map("mod_de_passe") @db.VarChar(255)
 
+  evenements_crees Evenement[]
+  
   @@map("utilisateur")
 }
 
@@ -36,17 +38,17 @@ model SousCategorie {
   id    Int    @id @default(autoincrement()) @map("id")
   titre String @map("titre") @db.VarChar(100)
 
-  categories CategorieSousCategorie[]
+  categories              CategorieSousCategorie[]
+  evenementSousCategories EvenementSousCategorie[]
 
   @@map("sous_categorie")
 }
-
 
 model EvenementSousCategorie {
   id_evenement      Int @map("id_evenement")
   id_sous_categorie Int @map("id_sous_categorie")
 
-  evenement       Evenement       @relation(fields: [id_evenement], references: [id])
+  evenement      Evenement     @relation(fields: [id_evenement], references: [id])
   sous_categorie SousCategorie @relation(fields: [id_sous_categorie], references: [id])
 
   @@id([id_evenement, id_sous_categorie])
@@ -54,19 +56,28 @@ model EvenementSousCategorie {
 }
 
 model Evenement {
-  id          Int       @id @default(autoincrement()) @map("id")
-  titre       String    @map("titre") @db.VarChar(100)
-  description String?   @map("description") @db.Text
-  date_debut  DateTime? @map("date_debut") @db.Date
-  date_fin    DateTime? @map("date_fin") @db.Date
-  adresse     String?   @map("adresse") @db.VarChar(255)
-  code_postal String?   @map("code_postal") @db.VarChar(10)
-  ville       String?   @map("ville") @db.VarChar(100)
-  site_web    String?   @map("site_web") @db.VarChar(255)
+  id               Int       @id @default(autoincrement()) @map("id")
+  titre            String    @map("titre") @db.VarChar(100)
+  description      String?   @map("description") @db.Text
+  date_debut       DateTime? @map("date_debut") @db.Date
+  date_fin         DateTime? @map("date_fin") @db.Date
+  nom_du_lieu      String?   @map("nom_du_lieu") @db.VarChar(255)
+  adresse          String?   @map("adresse") @db.VarChar(255)
+  code_postal      String?   @map("code_postal") @db.VarChar(10)
+  ville            String?   @map("ville") @db.VarChar(100)
+  departement      String?   @map("departement") @db.VarChar(100)
+  region           String?   @map("region") @db.VarChar(100)
+  site_web         String?   @map("site_web") @db.VarChar(255)
+  informations_sup String?   @map("informations_sup") @db.Text
+  latitude         String?   @map("latitude") @db.VarChar(100)
+  longitude        String?   @map("longitude") @db.VarChar(100)
 
-  id_categorie Int @map("id_categorie")
+  id_categorie Int       @map("id_categorie")
+  id_utilisateur Int?      @map("id_utilisateur")
 
+  utilisateur Utilisateur? @relation(fields: [id_utilisateur], references: [id])
   categorie Categorie @relation(fields: [id_categorie], references: [id])
+  evenementSousCategories EvenementSousCategorie[]
 
   @@map("evenement")
 }
