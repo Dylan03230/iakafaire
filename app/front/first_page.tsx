@@ -165,7 +165,7 @@ export default function FirstPage() {
             <div className="flex items-center gap-3 px-6 py-4 flex-1">
               <input
                 type="text"
-                placeholder="Qu'elles est le festival le plus proche se samedi"
+                placeholder="Qu'elles est la festival le plus proche se samedi"
                 className="flex-1 outline-none text-gray-700 bg-transparent placeholder-gray-400 text-sm"
               />
             </div>
